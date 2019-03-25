@@ -48,7 +48,7 @@ class DatePickerView: UIView {
             window.addSubview(blurredBackGround)
             window.addSubview(self)
             
-            let height: CGFloat = 250
+            let height: CGFloat = 300
             let y = window.frame.height - height
             self.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
