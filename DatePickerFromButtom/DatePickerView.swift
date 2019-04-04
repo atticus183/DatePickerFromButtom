@@ -24,6 +24,18 @@ class DatePickerView: UIView {
         return button
     }()
     
+    lazy var todayBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple, for: .normal)
+        button.setTitle("Today", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(todayTapped), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.calendar = .current
@@ -75,6 +87,10 @@ class DatePickerView: UIView {
         }
     }
     
+    @objc func todayTapped() {
+        datePicker.date = Date()
+    }
+    
     @objc func handleDismiss() {
         UIView.animate(withDuration: 0.3) {
             self.blurredBackGround.alpha = 0.0
@@ -94,6 +110,7 @@ class DatePickerView: UIView {
         
         self.addSubview(blurredBackGround)
         self.addSubview(doneBtn)
+        self.addSubview(todayBtn)
         self.addSubview(datePicker)
         
         setupConstraints()
@@ -109,6 +126,11 @@ class DatePickerView: UIView {
         doneBtn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         doneBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         doneBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        todayBtn.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        todayBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+        todayBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        todayBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
         datePicker.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         datePicker.topAnchor.constraint(equalTo: doneBtn.bottomAnchor, constant: 0).isActive = true
