@@ -8,36 +8,36 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class DateVC: UIViewController {
     
     lazy var customDatePickerView: DatePickerView = {
         let pickerView = DatePickerView()
         return pickerView
     }()
     
-    var selectedDate: Date?
+    var selectedDate: Date? {
+        didSet {
+            dateLbl.text = selectedDate?.formatDateLong()
+        }
+    }
     
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var pickDateBtnOutlet: UIButton!
     @IBAction func pickDateBtn(_ sender: UIButton) {
         customDatePickerView.showDatePicker()
+        
+        customDatePickerView.passDate = { [weak self] date in
+            self?.selectedDate = date
+        }
+
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Round btn corners
         pickDateBtnOutlet.layer.cornerRadius = pickDateBtnOutlet.layer.frame.height / 2
         
-        customDatePickerView.passDate = { [weak self] date in
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .short
-            
-            let dateString = dateFormatter.string(from: date)
-            self?.dateLbl.text = dateString
-            self?.selectedDate = date
-        }
     }
     
 }

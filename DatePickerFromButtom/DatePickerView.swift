@@ -6,6 +6,8 @@
 //  Copyright © 2019 Josh R. All rights reserved.
 //
 
+//Inspired by LBTA on YouTube
+
 import UIKit
 
 class DatePickerView: UIView {
@@ -137,5 +139,6 @@ class DatePickerView: UIView {
         datePicker.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
         datePicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
     }
+    
     
 }
